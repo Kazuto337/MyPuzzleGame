@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DependencyInjection;
 
-public class GameManager : MonoBehaviour , IMovementVerifier
+public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
 {
     public static GameManager Instance;
 
-    private PuzzleEngine _puzzleEngine;
+    [Inject] private PuzzleEngine _puzzleEngine;
 
-    public void Construct(PuzzleEngine puzzleEngine)
-    {
-        _puzzleEngine = puzzleEngine;
-    }
-
-    private void Awake()
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -25,7 +21,7 @@ public class GameManager : MonoBehaviour , IMovementVerifier
         }
     }
 
-    public Vector3 VerifyMovement(CubeBehavior cube , Vector3Int movementVector)
+    public Vector3 VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
     {
         return _puzzleEngine.VerifyMovement(cube, movementVector);
     }

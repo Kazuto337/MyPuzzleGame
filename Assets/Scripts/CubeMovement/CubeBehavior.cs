@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class CubeBehavior : MonoBehaviour
 {
-    int _ID;
+    int _ID; //Helps Identify CUbes by JSON
 
-    GameObject controls;
+    [SerializeField] GameObject controls;
     bool isSelected = false;
-    [SerializeField] bool isMovable;
+    bool isMovable;
 
+    public bool IsMovable { get => isMovable; }
+
+    public void Construct(int _ID, bool _isMovable)
+    {
+        isMovable = _isMovable;
+    }
     public void OnCubeSelected()
     {
         if (isMovable == false)
