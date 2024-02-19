@@ -35,6 +35,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClickButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""18f11788-fbf6-48a0-9623-1ae0425ba375"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""DragCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""589fd421-eb7e-4c98-8d35-47d20deff501"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_DragCamera = m_Gameplay.FindAction("DragCamera", throwIfNotFound: true);
+        m_Gameplay_ClickButton = m_Gameplay.FindAction("ClickButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +140,13 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_DragCamera;
+    private readonly InputAction m_Gameplay_ClickButton;
     public struct GameplayActions
     {
         private @ActionMap m_Wrapper;
         public GameplayActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @DragCamera => m_Wrapper.m_Gameplay_DragCamera;
+        public InputAction @ClickButton => m_Wrapper.m_Gameplay_ClickButton;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +159,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @DragCamera.started += instance.OnDragCamera;
             @DragCamera.performed += instance.OnDragCamera;
             @DragCamera.canceled += instance.OnDragCamera;
+            @ClickButton.started += instance.OnClickButton;
+            @ClickButton.performed += instance.OnClickButton;
+            @ClickButton.canceled += instance.OnClickButton;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -143,6 +169,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @DragCamera.started -= instance.OnDragCamera;
             @DragCamera.performed -= instance.OnDragCamera;
             @DragCamera.canceled -= instance.OnDragCamera;
+            @ClickButton.started -= instance.OnClickButton;
+            @ClickButton.performed -= instance.OnClickButton;
+            @ClickButton.canceled -= instance.OnClickButton;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -163,5 +192,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnDragCamera(InputAction.CallbackContext context);
+        void OnClickButton(InputAction.CallbackContext context);
     }
 }

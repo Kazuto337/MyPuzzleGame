@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
         }
     }
 
-    public Vector3 VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
+    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
     {
-        return _puzzleEngine.VerifyMovement(cube, movementVector);
+        _puzzleEngine.VerifyMovement(cube, movementVector);
     }
 }

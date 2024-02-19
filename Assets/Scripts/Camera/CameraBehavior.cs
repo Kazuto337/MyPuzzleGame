@@ -23,7 +23,6 @@ public class CameraBehavior : MonoBehaviour
         startingPosition = _camera.ScreenToViewportPoint(Input.mousePosition);
 
         isDragging = action.performed || action.started;
-        Debug.Log(isDragging);
     }
 
     public void Move()

@@ -7,5 +7,5 @@ public class Arrow_SO : ScriptableObject
 {
     [SerializeField] Vector3Int movementFactor;
 
-    public Vector3 MovementFactor { get => movementFactor;}
+    public Vector3Int MovementFactor { get => movementFactor;}
 }

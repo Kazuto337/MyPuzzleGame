@@ -11,7 +11,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
     private void Start()
     {
-        puzzleMatrix = new Slot[3,3,3];
+        puzzleMatrix = new Slot[3, 3, 3];
         CreatePuzzle();
     }
 
@@ -56,6 +56,8 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                     GameObject slot = new GameObject();
                     slot.name = "slot";
                     slot.AddComponent<Slot>();
+                    slot.GetComponent<Slot>().matrixPosition = new Vector3(i, j, k);
+
                     slot.transform.localScale = slotScale;
 
                     slot.transform.SetParent(matrixOrigin.transform);
@@ -104,15 +106,15 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                 CubeBehavior indexCubeBehavior = indexCube.GetComponent<CubeBehavior>();
 
                 indexCubeBehavior.Construct(i, true);
-                puzzleMatrix[j,k,w].AddCube(indexCubeBehavior);
+                puzzleMatrix[j, k, w].AddCube(indexCubeBehavior);
                 continue;
             }
         }
-    } 
+    }
 
     private Vector3Int FindEmptySlot()
     {
-        Vector3Int foundedSlot = new Vector3Int(0,0,0);
+        Vector3Int foundedSlot = new Vector3Int(0, 0, 0);
         bool founded = false;
 
         for (int i = 0; i < puzzleMatrix.GetLength(0); i++)
@@ -143,20 +145,25 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
     }
     #endregion
 
-    public Vector3 VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
+    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
     {
         Vector3Int selectedCubePos = Look4CubePositionInArray(cube);
         Vector3Int newPosition = selectedCubePos + movementVector;
-
-        if (puzzleMatrix[newPosition.x, newPosition.y, newPosition.y].Cube == null)
+        bool validationA = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].IsEmpy;
+        if (validationA)
         {
             puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].AddCube(cube);
             puzzleMatrix[selectedCubePos.x, selectedCubePos.y, selectedCubePos.z].RemoveCube();
 
-            return puzzleMatrix[newPosition.x, newPosition.y, newPosition.y].transform.position;
+            cube.transform.parent = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].transform;
+            cube.transform.localPosition = Vector3.zero;
+
+            Debug.LogWarning("Cube Moved Successfully");
+            return;
         }
 
-        return cube.transform.position;
+        Debug.LogWarning("Cube Failed 2 Move");
+        return;
     }
 
     /// <summary>

@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ArrowBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Arrow_SO arrowData;
+    [SerializeField] CubeBehavior cubeBehavior;
 
-    // Update is called once per frame
-    void Update()
+    public void MoveCubve()
     {
-        
+        Debug.Log("ArrowPressed: " + gameObject.name);
+        cubeBehavior.Try2Move(arrowData.MovementFactor);
     }
 }

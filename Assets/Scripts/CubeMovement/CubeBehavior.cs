@@ -19,6 +19,11 @@ public class CubeBehavior : MonoBehaviour
         isMovable = _isMovable;
         this._ID = _ID;
 
+        if (_isMovable == false)
+        {
+            Destroy(controls);
+        }
+
         foreach (TMP_Text item in textBoxes)
         {
             item.text = _ID.ToString();
@@ -42,37 +47,6 @@ public class CubeBehavior : MonoBehaviour
     public void Try2Move(Vector3Int movementVector)
     {
         GameManager gameManager = GameManager.Instance;
-        if (gameManager.VerifyMovement(this, movementVector) == transform.position)
-        {
-            return;
-        }
-
-        Move(gameManager.VerifyMovement(this, movementVector));
-    }
-
-    public void Move(Vector3 newPosition)
-    {
-        StartCoroutine(MovementBehavior(newPosition));
-    }
-
-    IEnumerator MovementBehavior(Vector3 newPosition)
-    {
-        float t = 0;
-
-        while (newPosition.magnitude - transform.position.magnitude <= 0.2f)
-        {
-            t += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, newPosition, t);
-
-            float distance = newPosition.magnitude - transform.position.magnitude;
-
-            if (distance == 0 || distance < 0.2f || transform.position == newPosition)
-            {
-                transform.position = newPosition;
-                break;
-            }
-
-            yield return null;
-        }
+        gameManager.VerifyMovement(this , movementVector);
     }
 }
