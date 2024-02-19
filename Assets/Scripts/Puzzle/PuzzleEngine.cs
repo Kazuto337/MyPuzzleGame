@@ -28,15 +28,15 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
         //FemalePosition
         GameObject newCube1 = Instantiate(cubePrefab, puzzleMatrix[1, 0, 2].transform);
-        indexCubeBehavior = newCube.GetComponent<CubeBehavior>();
-        indexCubeBehavior.Construct(8, false);
+        indexCubeBehavior = newCube1.GetComponent<CubeBehavior>();
+        indexCubeBehavior.Construct(2, false);
 
         puzzleMatrix[2, 0, 1].AddCube(indexCubeBehavior);
 
         //Final Position
         GameObject newCube2 = Instantiate(cubePrefab, puzzleMatrix[1, 2, 1].transform);
-        CubeBehavior newCubeBehavior = newCube.GetComponent<CubeBehavior>();
-        newCubeBehavior.Construct(4, false);
+        CubeBehavior newCubeBehavior = newCube2.GetComponent<CubeBehavior>();
+        newCubeBehavior.Construct(3, false);
 
         puzzleMatrix[1, 2, 1].AddCube(newCubeBehavior);
 
