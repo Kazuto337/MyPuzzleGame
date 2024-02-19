@@ -40,7 +40,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
         puzzleMatrix[1, 2, 1].AddCube(newCubeBehavior);
 
-        //AddRandomCubes();
+        AddRandomCubes();
     }
 
     private void FillSlotMatrix()
@@ -85,12 +85,62 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
             if (puzzleMatrix[x, y, z].Cube == null)
             {
-                GameObject indexCube = Instantiate(cubePrefab, puzzleMatrix[0, 1, 0].transform);
+                GameObject indexCube = Instantiate(cubePrefab, puzzleMatrix[x, y, z].transform);
                 CubeBehavior indexCubeBehavior = indexCube.GetComponent<CubeBehavior>();
+
                 indexCubeBehavior.Construct(i, true);
+                puzzleMatrix[x, y, z].AddCube(indexCubeBehavior);
+                continue;
+            }
+            else
+            {
+                Vector3Int indexSlot = FindEmptySlot();
+                int j = indexSlot.x;
+                int k = indexSlot.y;
+                int w = indexSlot.z;
+
+
+                GameObject indexCube = Instantiate(cubePrefab, puzzleMatrix[j, k, w].transform);
+                CubeBehavior indexCubeBehavior = indexCube.GetComponent<CubeBehavior>();
+
+                indexCubeBehavior.Construct(i, true);
+                puzzleMatrix[j,k,w].AddCube(indexCubeBehavior);
+                continue;
             }
         }
     } 
+
+    private Vector3Int FindEmptySlot()
+    {
+        Vector3Int foundedSlot = new Vector3Int(0,0,0);
+        bool founded = false;
+
+        for (int i = 0; i < puzzleMatrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < puzzleMatrix.GetLength(1); j++)
+            {
+                for (int k = 0; k < puzzleMatrix.GetLength(2); k++)
+                {
+                    if (puzzleMatrix[i, j, k].Cube == null)
+                    {
+                        foundedSlot = new Vector3Int(i, j, k);
+                        founded = true;
+                        break;
+                    }
+                }
+                if (founded)
+                {
+                    break;
+                }
+            }
+            if (founded)
+            {
+                break;
+            }
+        }
+
+        return foundedSlot;
+    }
     #endregion
 
     public Vector3 VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
