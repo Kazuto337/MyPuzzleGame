@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Arrow" , menuName = "ScriptableObject/ArrowValue" , order = 0)]
 public class Arrow_SO : ScriptableObject
 {
-    [SerializeField] Vector3 movementFactor;
+    [SerializeField] Vector3Int movementFactor;
 
     public Vector3 MovementFactor { get => movementFactor;}
 }
