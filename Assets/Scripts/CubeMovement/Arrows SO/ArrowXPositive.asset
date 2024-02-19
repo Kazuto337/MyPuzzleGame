@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085258be9fc958e47944d63395805c38, type: 3}
   m_Name: ArrowXPositive
   m_EditorClassIdentifier: 
-  movementFactor: {x: -1, y: 0, z: 0}
+  movementFactor: {x: 1, y: 0, z: 0}

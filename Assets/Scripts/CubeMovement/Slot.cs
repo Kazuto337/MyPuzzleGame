@@ -9,7 +9,7 @@ public class Slot : MonoBehaviour
     bool isEmpy = true;
 
     public CubeBehavior Cube { get => cube; }
-    public bool IsEmpy { get => isEmpy;}
+    public bool IsEmpty { get => isEmpy;}
 
     public void AddCube(CubeBehavior newCube)
     {

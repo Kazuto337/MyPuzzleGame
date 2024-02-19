@@ -24,14 +24,14 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
         CubeBehavior indexCubeBehavior = newCube.GetComponent<CubeBehavior>();
         indexCubeBehavior.Construct(1, false);
 
-        puzzleMatrix[0, 0, 1].AddCube(indexCubeBehavior);
+        puzzleMatrix[1, 0, 0].AddCube(indexCubeBehavior);
 
         //FemalePosition
         GameObject newCube1 = Instantiate(cubePrefab, puzzleMatrix[1, 0, 2].transform);
         indexCubeBehavior = newCube1.GetComponent<CubeBehavior>();
         indexCubeBehavior.Construct(2, false);
 
-        puzzleMatrix[2, 0, 1].AddCube(indexCubeBehavior);
+        puzzleMatrix[1, 0, 2].AddCube(indexCubeBehavior);
 
         //Final Position
         GameObject newCube2 = Instantiate(cubePrefab, puzzleMatrix[1, 2, 1].transform);
@@ -45,43 +45,31 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
     private void FillSlotMatrix()
     {
-        Vector3 slotPosition = Vector3.zero;
-        Vector3 slotScale = Vector3.one;
+        float slotDistance = 1.0f;
+
         for (int i = 0; i < puzzleMatrix.GetLength(0); i++)
         {
             for (int j = 0; j < puzzleMatrix.GetLength(1); j++)
             {
                 for (int k = 0; k < puzzleMatrix.GetLength(2); k++)
                 {
-                    GameObject slot = new GameObject();
-                    slot.name = "slot";
-                    slot.AddComponent<Slot>();
-                    slot.GetComponent<Slot>().matrixPosition = new Vector3(i, j, k);
+                    // Calculate distance between Slots
+                    Vector3 slotPosition = new Vector3(i * slotDistance, j * slotDistance, k * slotDistance);
 
-                    slot.transform.localScale = slotScale;
-
+                    GameObject slot = new GameObject("Slot");
                     slot.transform.SetParent(matrixOrigin.transform);
-                    slotScale = slot.transform.localScale;
-
-                    slot.transform.position = slotPosition;
-
-                    slotPosition.z -= slotScale.z; //Each Iteration moves the slot one unit Based on the gameObject scale
+                    slot.transform.localPosition = slotPosition;
+                    slot.AddComponent<Slot>().matrixPosition = new Vector3(i, j, k);
 
                     puzzleMatrix[i, j, k] = slot.GetComponent<Slot>();
                 }
-
-                slotPosition.y -= slotScale.y;
-                slotPosition.z = 0;
             }
-
-            slotPosition.x -= slotScale.x;
-            slotPosition.y = 0;
         }
     }
 
     private void AddRandomCubes()
     {
-        for (int i = 4; i < 11; i++)
+        for (int i = 4; i < 12; i++)
         {
             int x = Random.Range(1, 3), y = Random.Range(1, 3), z = Random.Range(1, 3);
 
@@ -123,7 +111,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
             {
                 for (int k = 0; k < puzzleMatrix.GetLength(2); k++)
                 {
-                    if (puzzleMatrix[i, j, k].Cube == null)
+                    if (puzzleMatrix[i, j, k].IsEmpty)
                     {
                         foundedSlot = new Vector3Int(i, j, k);
                         founded = true;
@@ -149,7 +137,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
     {
         Vector3Int selectedCubePos = Look4CubePositionInArray(cube);
         Vector3Int newPosition = selectedCubePos + movementVector;
-        bool validationA = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].IsEmpy;
+        bool validationA = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].IsEmpty;
         if (validationA)
         {
             puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].AddCube(cube);
@@ -204,6 +192,29 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
         }
 
         return foundedSlot;
+    }
+
+    public Dictionary<int, Vector3Int> ExportMapDictionary()
+    {
+        Dictionary<int, Vector3Int> mapDictionary = new Dictionary<int, Vector3Int>();
+
+        for (int i = 0; i < puzzleMatrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < puzzleMatrix.GetLength(1); j++)
+            {
+                for (int k = 0; k < puzzleMatrix.GetLength(2); k++)
+                {
+                    if (!puzzleMatrix[i, j, k].IsEmpty)
+                    {
+                        Vector3Int position = new Vector3Int(i, j, k);
+                        int cubeID = puzzleMatrix[i, j, k].Cube.ID;
+                        mapDictionary.Add(cubeID , position);
+                    }
+                }
+            }
+        }
+
+        return mapDictionary;
     }
 
     [Provide]

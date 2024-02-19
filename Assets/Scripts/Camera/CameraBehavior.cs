@@ -1,39 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraBehavior : MonoBehaviour
 {
-    [SerializeField] Camera _camera;
-    Vector3 startingPosition;
     [SerializeField] GameObject target;
     bool isDragging;
-
-    private void FixedUpdate()
-    {
-        if (isDragging)
-        {
-            Move();
-        }
-    }
+    Vector2 startingMousePosition;
 
     public void OnDrag(InputAction.CallbackContext action)
     {
-        startingPosition = _camera.ScreenToViewportPoint(Input.mousePosition);
-
-        isDragging = action.performed || action.started;
+        if (action.performed || action.started)
+        {
+            startingMousePosition = Mouse.current.position.ReadValue();
+            isDragging = true;
+        }
+        else if (action.canceled)
+        {
+            isDragging = false;
+        }
     }
 
-    public void Move()
+    void FixedUpdate()
     {
-        
-        Vector3 angle = startingPosition - _camera.ScreenToViewportPoint(Input.mousePosition);
-
-        _camera.transform.RotateAround(target.transform.position , Vector3.right , angle.y * 180);
-        _camera.transform.RotateAround(target.transform.position , Vector3.down , angle.x * 180);
-
-        startingPosition = _camera.ScreenToViewportPoint(Input.mousePosition);
+        if (isDragging)
+        {
+            RotateObject();
+        }
     }
 
+    void RotateObject()
+    {
+        Vector2 currentMousePosition = Mouse.current.position.ReadValue();
+        Vector2 delta = currentMousePosition - startingMousePosition;
+
+        float rotationSpeed = 0.1f;
+        Vector3 rotationAngles = new Vector3(delta.y, -delta.x, 0) * rotationSpeed;
+
+        target.transform.Rotate(rotationAngles, Space.World);
+
+        startingMousePosition = currentMousePosition;
+    }
 }

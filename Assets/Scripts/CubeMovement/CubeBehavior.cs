@@ -13,6 +13,7 @@ public class CubeBehavior : MonoBehaviour
     [SerializeField] List<TMP_Text> textBoxes;
 
     public bool IsMovable { get => isMovable; }
+    public int ID { get => _ID;}
 
     public void Construct(int _ID, bool _isMovable)
     {
