@@ -6,6 +6,7 @@ public class RaycastButtonInteraction : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private float _rayLength;
+    CubeBehavior cube;
     public void OnTap(InputAction.CallbackContext action)
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -23,6 +24,17 @@ public class RaycastButtonInteraction : MonoBehaviour
                 button.onClick.Invoke();
                 return;
             }
+
+            CubeBehavior cube1 = hit.collider.GetComponent<CubeBehavior>();
+            if (cube != null && cube != cube1)
+            {
+                cube.OnCubeDeselected();
+                cube = cube1;
+                return;
+            }
+
+            cube = cube1;
+            cube.OnCubeSelected();
         }
     }
 }

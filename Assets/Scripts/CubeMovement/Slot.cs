@@ -5,7 +5,7 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     CubeBehavior cube;
-    public Vector3 matrixPosition;
+    public Vector3Int matrixPosition;
     bool isEmpy = true;
 
     public CubeBehavior Cube { get => cube; }
@@ -15,6 +15,7 @@ public class Slot : MonoBehaviour
     {
         isEmpy = false;
         cube = newCube;
+        cube.PrintCoord(matrixPosition);
     }
 
     public void RemoveCube() 

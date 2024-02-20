@@ -59,7 +59,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                     GameObject slot = new GameObject("Slot");
                     slot.transform.SetParent(matrixOrigin.transform);
                     slot.transform.localPosition = slotPosition;
-                    slot.AddComponent<Slot>().matrixPosition = new Vector3(i, j, k);
+                    slot.AddComponent<Slot>().matrixPosition = new Vector3Int(i, j, k);
 
                     puzzleMatrix[i, j, k] = slot.GetComponent<Slot>();
                 }

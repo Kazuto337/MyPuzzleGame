@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DependencyInjection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using TMPro;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
 {
@@ -14,8 +13,11 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
     [Inject] private PuzzleEngine _puzzleEngine;
 
     [SerializeField] TMP_Text feedbackTxt;
-    [SerializeField] GameObject winnerPanel;
+    [SerializeField] TMP_Text answerTxt;
+    [SerializeField] GameObject winnerPanel;    
 
+    Dictionary<int, Vector3Int> mapDictionary;
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,34 +30,48 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
         }
     }
 
+    private void Start()
+    {
+        LoadAnswerFromJson();
+        foreach (var key in mapDictionary.Keys)
+        {
+            answerTxt.text += key + " = " + mapDictionary[key]+"\n";
+        }
+    }
+
     public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
     {
         _puzzleEngine.VerifyMovement(cube, movementVector);
     }
     public void CheckAnswer()
     {
-        string filePath = Application.streamingAssetsPath + "/FinalMatrix.txt";
+        Dictionary<int, Vector3Int> gameMap = _puzzleEngine.ExportMapDictionary();
 
-        if (File.Exists(filePath))
+        if (IsAnswerCorrect(mapDictionary, gameMap))
         {
-            LoadAnswerFromJson(filePath);
-        }
-        else
-        {
-            Debug.LogError($"File FinalMatrix.txt not found on Folder.");
+            feedbackTxt.color = Color.green;
+            feedbackTxt.text = "Correct Answer";
+            winnerPanel.SetActive(true);
         }
     }
 
-    private void LoadAnswerFromJson(string jsonFilePath)
+    private void LoadAnswerFromJson()
     {
-
+        string jsonFilePath = Application.streamingAssetsPath + "/FinalMatrix.txt";
         string json = File.ReadAllText(jsonFilePath);
-        Matrix_DTO mapData = JsonUtility.FromJson<Matrix_DTO>(json);
 
-        Dictionary<int, Vector3Int> mapDictionary = CreateMapDictionary(mapData.map);
-        Dictionary<int, Vector3Int> gameMap = _puzzleEngine.ExportMapDictionary();
+        Matrix_DTO mapData = new Matrix_DTO();
+        try
+        {
+            mapData = JsonUtility.FromJson<Matrix_DTO>(json);
+        }
+        catch (System.Exception error)
+        {
+            Debug.LogException(error);
+            feedbackTxt.text = error.Message;
+        }
 
-        IsAnswerCorrect(mapDictionary , gameMap);
+        mapDictionary = CreateMapDictionary(mapData.map);      
     }
     private Dictionary<int, Vector3Int> CreateMapDictionary(List<MapItem> mapItems)
     {
@@ -90,10 +106,11 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
 
             if (map1[key] != map2[key])
             {
+                feedbackTxt.text = "Incorrect Answer";
                 return false;
             }
         }
-
+        
         return true;
     }
 

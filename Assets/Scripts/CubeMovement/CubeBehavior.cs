@@ -11,9 +11,15 @@ public class CubeBehavior : MonoBehaviour
     bool isSelected = false;
     bool isMovable;
     [SerializeField] List<TMP_Text> textBoxes;
+    [SerializeField] List<TMP_Text> coordBoxes;
 
     public bool IsMovable { get => isMovable; }
     public int ID { get => _ID;}
+
+    private void Start()
+    {
+        OnCubeDeselected();
+    }
 
     public void Construct(int _ID, bool _isMovable)
     {
@@ -23,6 +29,7 @@ public class CubeBehavior : MonoBehaviour
         if (_isMovable == false)
         {
             Destroy(controls);
+            GetComponent<Renderer>().material.color = Color.blue;
         }
 
         foreach (TMP_Text item in textBoxes)
@@ -38,16 +45,27 @@ public class CubeBehavior : MonoBehaviour
         }
 
         isSelected = true;
-        controls.SetActive(true);
+        controls.SetActive(isSelected);
     }
     public void OnCubeDeselected()
     {
+        if (isMovable == false)
+        {
+            return;
+        }
         isSelected = false;
-        controls.SetActive(false);
+        controls.SetActive(isSelected);
     }
     public void Try2Move(Vector3Int movementVector)
     {
         GameManager gameManager = GameManager.Instance;
         gameManager.VerifyMovement(this , movementVector);
+    }
+    public void PrintCoord(Vector3Int coord)
+    {
+        foreach (TMP_Text item in coordBoxes)
+        {
+            item.text = "<" + coord.x + " , " + coord.y + " , " + +coord.z + ">";
+        }
     }
 }
