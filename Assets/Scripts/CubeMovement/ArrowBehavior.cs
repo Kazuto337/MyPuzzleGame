@@ -10,6 +10,11 @@ public class ArrowBehavior : MonoBehaviour
     public void MoveCubve()
     {
         Debug.Log("ArrowPressed: " + gameObject.name);
-        cubeBehavior.Try2Move(arrowData.MovementFactor);
+        Try2Move(arrowData.MovementFactor);
+    }
+    public void Try2Move(Vector3Int movementVector)
+    {
+        GameManager gameManager = GameManager.Instance;
+        gameManager.VerifyMovement(cubeBehavior, movementVector);
     }
 }

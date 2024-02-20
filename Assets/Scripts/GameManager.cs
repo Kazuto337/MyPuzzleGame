@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
 
     [SerializeField] TMP_Text feedbackTxt;
     [SerializeField] TMP_Text answerTxt;
-    [SerializeField] GameObject winnerPanel;    
+    [SerializeField] GameObject winnerPanel;
 
-    Dictionary<int, Vector3Int> mapDictionary;
-    
+    Dictionary<int, Vector3Int> answersMap;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,28 +33,22 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
     private void Start()
     {
         LoadAnswerFromJson();
-        foreach (var key in mapDictionary.Keys)
+        foreach (var key in answersMap.Keys)
         {
-            answerTxt.text += key + " = " + mapDictionary[key]+"\n";
+            answerTxt.text += key + " = " + answersMap[key] + "\n";
         }
-    }
-
-    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
-    {
-        _puzzleEngine.VerifyMovement(cube, movementVector);
     }
     public void CheckAnswer()
     {
-        Dictionary<int, Vector3Int> gameMap = _puzzleEngine.ExportMapDictionary();
+        Dictionary<int, Vector3Int> gameMap = _puzzleEngine.ExportCubesMap();
 
-        if (IsAnswerCorrect(mapDictionary, gameMap))
+        if (IsAnswerCorrect(answersMap, gameMap))
         {
             feedbackTxt.color = Color.green;
             feedbackTxt.text = "Correct Answer";
             winnerPanel.SetActive(true);
         }
     }
-
     private void LoadAnswerFromJson()
     {
         string jsonFilePath = Application.streamingAssetsPath + "/FinalMatrix.txt";
@@ -71,9 +65,9 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
             feedbackTxt.text = error.Message;
         }
 
-        mapDictionary = CreateMapDictionary(mapData.map);      
+        answersMap = ConvertMapItem2Dictionary(mapData.map);
     }
-    private Dictionary<int, Vector3Int> CreateMapDictionary(List<MapItem> mapItems)
+    private Dictionary<int, Vector3Int> ConvertMapItem2Dictionary(List<MapItem> mapItems)
     {
         Dictionary<int, Vector3Int> mapDictionary = new Dictionary<int, Vector3Int>();
 
@@ -86,10 +80,8 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
 
             mapDictionary[item.value] = new Vector3Int(x, y, z);
         }
-
         return mapDictionary;
     }
-
     private bool IsAnswerCorrect(Dictionary<int, Vector3Int> map1, Dictionary<int, Vector3Int> map2)
     {
         if (map1.Count != map2.Count)
@@ -110,8 +102,11 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
                 return false;
             }
         }
-        
         return true;
+    }
+    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
+    {
+        _puzzleEngine.VerifyMovement(cube, movementVector);
     }
 
 }

@@ -10,6 +10,7 @@ public class CubeBehavior : MonoBehaviour
     [SerializeField] GameObject controls;
     bool isSelected = false;
     bool isMovable;
+
     [SerializeField] List<TMP_Text> textBoxes;
     [SerializeField] List<TMP_Text> coordBoxes;
 
@@ -56,11 +57,7 @@ public class CubeBehavior : MonoBehaviour
         isSelected = false;
         controls.SetActive(isSelected);
     }
-    public void Try2Move(Vector3Int movementVector)
-    {
-        GameManager gameManager = GameManager.Instance;
-        gameManager.VerifyMovement(this , movementVector);
-    }
+    
     public void PrintCoord(Vector3Int coord)
     {
         foreach (TMP_Text item in coordBoxes)

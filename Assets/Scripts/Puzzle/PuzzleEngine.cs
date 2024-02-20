@@ -20,6 +20,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
     {
         FillSlotMatrix();
 
+        //MalePosition
         GameObject newCube = Instantiate(cubePrefab, puzzleMatrix[1, 0, 0].transform);
         CubeBehavior indexCubeBehavior = newCube.GetComponent<CubeBehavior>();
         indexCubeBehavior.Construct(1, false);
@@ -66,7 +67,6 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
             }
         }
     }
-
     private void AddRandomCubes()
     {
         for (int i = 4; i < 12; i++)
@@ -99,7 +99,6 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
             }
         }
     }
-
     private Vector3Int FindEmptySlot()
     {
         Vector3Int foundedSlot = new Vector3Int(0, 0, 0);
@@ -132,27 +131,6 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
         return foundedSlot;
     }
     #endregion
-
-    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
-    {
-        Vector3Int selectedCubePos = Look4CubePositionInArray(cube);
-        Vector3Int newPosition = selectedCubePos + movementVector;
-        bool validationA = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].IsEmpty;
-        if (validationA)
-        {
-            puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].AddCube(cube);
-            puzzleMatrix[selectedCubePos.x, selectedCubePos.y, selectedCubePos.z].RemoveCube();
-
-            cube.transform.parent = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].transform;
-            cube.transform.localPosition = Vector3.zero;
-
-            Debug.LogWarning("Cube Moved Successfully");
-            return;
-        }
-
-        Debug.LogWarning("Cube Failed 2 Move");
-        return;
-    }
 
     /// <summary>
     /// Looks for the position of the passed CubeBehavior on the Matrix
@@ -194,7 +172,11 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
         return foundedSlot;
     }
 
-    public Dictionary<int, Vector3Int> ExportMapDictionary()
+    /// <summary>
+    /// Return a map of the slots in puzzle matrix with IsEmpty propertie equal false
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<int, Vector3Int> ExportCubesMap()
     {
         Dictionary<int, Vector3Int> mapDictionary = new Dictionary<int, Vector3Int>();
 
@@ -215,6 +197,26 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
         }
 
         return mapDictionary;
+    }
+    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
+    {
+        Vector3Int selectedCubePos = Look4CubePositionInArray(cube);
+        Vector3Int newPosition = selectedCubePos + movementVector;
+        bool validationA = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].IsEmpty;
+        if (validationA)
+        {
+            puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].AddCube(cube);
+            puzzleMatrix[selectedCubePos.x, selectedCubePos.y, selectedCubePos.z].RemoveCube();
+
+            cube.transform.parent = puzzleMatrix[newPosition.x, newPosition.y, newPosition.z].transform;
+            cube.transform.localPosition = Vector3.zero;
+
+            Debug.LogWarning("Cube Moved Successfully");
+            return;
+        }
+
+        Debug.LogWarning("Cube Failed 2 Move");
+        return;
     }
 
     [Provide]
