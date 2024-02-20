@@ -1511,7 +1511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1674048857}
-  _rayLength: 0
+  _rayLength: 100
 --- !u!1 &1718357236
 GameObject:
   m_ObjectHideFlags: 0
