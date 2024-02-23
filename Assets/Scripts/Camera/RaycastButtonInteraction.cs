@@ -20,7 +20,7 @@ public class RaycastButtonInteraction : MonoBehaviour
             Button button = hit.collider.GetComponent<Button>();
             if (button != null)
             {
-                Debug.Log("Button Founded = " + button.name);
+                Debug.LogWarning("Button Founded = " + button.name);
                 button.onClick.Invoke();
                 return;
             }

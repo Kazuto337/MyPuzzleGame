@@ -6,7 +6,7 @@ using System.IO;
 using TMPro;
 using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
+public class GameManager : MonoBehaviour, IDependencyProvider
 {
     public static GameManager Instance;
 
@@ -103,10 +103,6 @@ public class GameManager : MonoBehaviour, IDependencyProvider, IMovementVerifier
             }
         }
         return true;
-    }
-    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector)
-    {
-        _puzzleEngine.VerifyMovement(cube, movementVector);
     }
 
 }

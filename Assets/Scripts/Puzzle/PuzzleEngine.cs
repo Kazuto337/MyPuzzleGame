@@ -8,7 +8,6 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
     Slot[,,] puzzleMatrix;
     [SerializeField] GameObject matrixOrigin;
     [SerializeField] GameObject cubePrefab;
-
     private void Start()
     {
         puzzleMatrix = new Slot[3, 3, 3];
@@ -36,10 +35,10 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
 
         //Final Position
         GameObject newCube2 = Instantiate(cubePrefab, puzzleMatrix[1, 2, 1].transform);
-        CubeBehavior newCubeBehavior = newCube2.GetComponent<CubeBehavior>();
-        newCubeBehavior.Construct(3, false);
+        indexCubeBehavior = newCube2.GetComponent<CubeBehavior>();
+        indexCubeBehavior.Construct(3, false);
 
-        puzzleMatrix[1, 2, 1].AddCube(newCubeBehavior);
+        puzzleMatrix[1, 2, 1].AddCube(indexCubeBehavior);
 
         AddRandomCubes();
     }
@@ -60,7 +59,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                     GameObject slot = new GameObject("Slot");
                     slot.transform.SetParent(matrixOrigin.transform);
                     slot.transform.localPosition = slotPosition;
-                    slot.AddComponent<Slot>().matrixPosition = new Vector3Int(i, j, k);
+                    slot.AddComponent<Slot>().Construct(new Vector3Int(i, j, k));
 
                     puzzleMatrix[i, j, k] = slot.GetComponent<Slot>();
                 }
@@ -78,7 +77,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                 GameObject indexCube = Instantiate(cubePrefab, puzzleMatrix[x, y, z].transform);
                 CubeBehavior indexCubeBehavior = indexCube.GetComponent<CubeBehavior>();
 
-                indexCubeBehavior.Construct(i, true);
+                indexCubeBehavior.Construct(i, true , VerifyMovement);
                 puzzleMatrix[x, y, z].AddCube(indexCubeBehavior);
                 continue;
             }
@@ -93,7 +92,7 @@ public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvide
                 GameObject indexCube = Instantiate(cubePrefab, puzzleMatrix[j, k, w].transform);
                 CubeBehavior indexCubeBehavior = indexCube.GetComponent<CubeBehavior>();
 
-                indexCubeBehavior.Construct(i, true);
+                indexCubeBehavior.Construct(i, true , VerifyMovement);
                 puzzleMatrix[j, k, w].AddCube(indexCubeBehavior);
                 continue;
             }

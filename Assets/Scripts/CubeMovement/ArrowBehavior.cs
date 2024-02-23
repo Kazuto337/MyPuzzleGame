@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArrowBehavior : MonoBehaviour
 {
     [SerializeField] Arrow_SO arrowData;
     [SerializeField] CubeBehavior cubeBehavior;
 
-    public void MoveCubve()
+    private void Start()
     {
-        Debug.Log("ArrowPressed: " + gameObject.name);
-        Try2Move(arrowData.MovementFactor);
+        gameObject.GetComponent<Button>().onClick.AddListener(OnArrowPressed);
     }
-    public void Try2Move(Vector3Int movementVector)
+    private void OnArrowPressed()
     {
-        GameManager gameManager = GameManager.Instance;
-        gameManager.VerifyMovement(cubeBehavior, movementVector);
+        cubeBehavior.InvokeMovement(arrowData.MovementFactor);
     }
 }
