@@ -4,10 +4,14 @@ using UnityEngine;
 using DependencyInjection;
 using System.IO;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    [Inject] private PuzzleEngine _puzzleEngine;
+    PlayerInput inputManager;
+
+    [Inject] 
+    private PuzzleEngine _puzzleEngine;
 
     [SerializeField] TMP_Text feedbackTxt;
     [SerializeField] TMP_Text answerTxt;
@@ -88,6 +92,20 @@ public class GameManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void PauseGame()
+    {
+        inputManager.enabled = false;
+    }
+
+    public void ResumeGame()
+    {
+        inputManager.enabled=true;
+    }
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 
 }

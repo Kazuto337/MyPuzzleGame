@@ -10,13 +10,9 @@ public class InstructionsController : MonoBehaviour
 
     [SerializeField] InstructionsBehavior view;
 
-    private void Start()
-    {
-        view.LoadData(data);
-    }
-
     public void ShowInstructions()
     {
+        view.LoadData(data);
         view.gameObject.SetActive(true);
     }
     public void HideInstructions()

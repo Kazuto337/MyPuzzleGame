@@ -41,6 +41,7 @@ public class How2PlayData : IDependencyProvider
         pagesImages = new Dictionary<string, Sprite>();
         try
         {
+            int i = 0;
             string[] files = Directory.GetFiles(Application.dataPath + "/Sprites/Instructions", "*.png");
             foreach (var item in _instructionsDTO.pages)
             {
@@ -49,6 +50,7 @@ public class How2PlayData : IDependencyProvider
 
                 pagesImages[item.imageName] = newSprite;
                 pagesText[item.imageName] = item.message;
+                i++;
             }
         }
         catch (System.Exception error)
