@@ -4,12 +4,9 @@ using UnityEngine;
 using DependencyInjection;
 using System.IO;
 using TMPro;
-using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour, IDependencyProvider
+public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
     [Inject] private PuzzleEngine _puzzleEngine;
 
     [SerializeField] TMP_Text feedbackTxt;
@@ -17,18 +14,6 @@ public class GameManager : MonoBehaviour, IDependencyProvider
     [SerializeField] GameObject winnerPanel;
 
     Dictionary<int, Vector3Int> answersMap;
-
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     private void Start()
     {

@@ -1,0 +1,16 @@
+{
+    "pages": [
+        {
+            "imageName": "Page01",
+            "message": "Use the ouse to navegate through the enviroment"
+        },
+        {
+            "imageName": "Page02",
+            "message": "Tap the gray cubes to enable the movement controls and interact with the puzzle."
+        },
+        {
+            "imageName": "Page03",
+            "message": "Use the YELLOW arrows to move the gray cubes all around the puzzles and match the cubes coordinates with the ones on the ANSWERS LIST."
+        }
+    ]
+}
