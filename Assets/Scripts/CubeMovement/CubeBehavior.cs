@@ -92,6 +92,6 @@ public class CubeBehavior : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnArrowPressed.RemoveAllListeners();
+        OnArrowPressed?.RemoveAllListeners();
     }
 }
