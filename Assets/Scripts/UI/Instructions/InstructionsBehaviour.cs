@@ -107,4 +107,8 @@ public class InstructionsBehaviour : MonoBehaviour
         uiPages[currentPage].gameObject.SetActive(true);
     }
 
+    private void OnDestroy()
+    {
+        closeInstrucionsButton.onClick.RemoveAllListeners();
+    }
 }

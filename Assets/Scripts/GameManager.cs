@@ -8,19 +8,21 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    PlayerInput inputManager;
+    [Inject]
+    UI_Manager uiManager;
 
-    [Inject] 
+    [Inject]
     private PuzzleEngine _puzzleEngine;
 
     [SerializeField] TMP_Text feedbackTxt;
     [SerializeField] TMP_Text answerTxt;
-    [SerializeField] GameObject winnerPanel;
 
     Dictionary<int, Vector3Int> answersMap;
 
+    [SerializeField] PlayerInput inputManager;
     private void Start()
     {
+        uiManager.AssignButtonsActions(PauseGame, CheckAnswer, ResumeGame, CloseGame);
         LoadAnswerFromJson();
         foreach (var key in answersMap.Keys)
         {
@@ -35,7 +37,8 @@ public class GameManager : MonoBehaviour
         {
             feedbackTxt.color = Color.green;
             feedbackTxt.text = "Correct Answer";
-            winnerPanel.SetActive(true);
+
+            uiManager.OnGameWinned();
         }
     }
     private void LoadAnswerFromJson()
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        inputManager.enabled=true;
+        inputManager.enabled = true;
     }
     public void CloseGame()
     {
