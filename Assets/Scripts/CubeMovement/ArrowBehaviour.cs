@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArrowBehavior : MonoBehaviour
+public class ArrowBehaviour : MonoBehaviour
 {
     [SerializeField] Arrow_SO arrowData;
-    [SerializeField] CubeBehavior cubeBehavior;
+    [SerializeField] CubeBehaviour cubeBehavior;
 
     private void Start()
     {

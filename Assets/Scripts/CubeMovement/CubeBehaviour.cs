@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CubeBehavior : MonoBehaviour
+public class CubeBehaviour : MonoBehaviour
 {
-    UnityEvent<CubeBehavior, Vector3Int> OnArrowPressed;
+    UnityEvent<CubeBehaviour, Vector3Int> OnArrowPressed;
 
     int _ID; //Helps Identify Cubes by JSON
 
@@ -41,11 +41,11 @@ public class CubeBehavior : MonoBehaviour
             item.text = _ID.ToString();
         }
     }
-    public void Construct(int _ID, bool _isMovable , UnityAction<CubeBehavior, Vector3Int> action)
+    public void Construct(int _ID, bool _isMovable , UnityAction<CubeBehaviour, Vector3Int> action)
     {
         isMovable = _isMovable;
         this._ID = _ID;
-        OnArrowPressed = new UnityEvent<CubeBehavior, Vector3Int>();
+        OnArrowPressed = new UnityEvent<CubeBehaviour, Vector3Int>();
         if (_isMovable == false)
         {
             Destroy(controls);

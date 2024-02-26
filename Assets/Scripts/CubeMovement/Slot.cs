@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class Slot : MonoBehaviour
 {
-    CubeBehavior cube;
+    CubeBehaviour cube;
     private Vector3Int matrixPosition;
     bool isEmpty = true;
 
-    public CubeBehavior Cube { get => cube; }
+    public CubeBehaviour Cube { get => cube; }
     public bool IsEmpty { get => isEmpty; }
 
-    public void Construct(Vector3Int _matrixPosition, CubeBehavior _cube = null)
+    public void Construct(Vector3Int _matrixPosition, CubeBehaviour _cube = null)
     {
         matrixPosition = _matrixPosition;
         cube = _cube;
@@ -25,7 +25,7 @@ public class Slot : MonoBehaviour
         isEmpty = true;
     }
 
-    public void AddCube(CubeBehavior newCube)
+    public void AddCube(CubeBehaviour newCube)
     {
         isEmpty = false;
         cube = newCube;
