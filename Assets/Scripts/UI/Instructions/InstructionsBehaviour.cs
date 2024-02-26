@@ -55,7 +55,7 @@ public class InstructionsBehaviour : MonoBehaviour
             Debug.LogException(error);
         }
 
-        string folderPath = Application.dataPath + "/Sprites/Instructions";
+        string folderPath = Application.streamingAssetsPath + "/Sprites/Instructions";
         string[] pngFiles = Directory.GetFiles(folderPath, "*.png");
 
         return pngFiles;
