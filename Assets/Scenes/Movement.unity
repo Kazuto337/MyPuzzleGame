@@ -1055,6 +1055,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 18f11788-fbf6-48a0-9623-1ae0425ba375
     m_ActionName: Gameplay/ClickButton[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1674048860}
+        m_TargetAssemblyTypeName: CameraBehavior, Assembly-CSharp
+        m_MethodName: OnScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0d38dd5f-1c99-4ffe-aacd-ce596f42fc14
+    m_ActionName: Gameplay/ZoomCamena[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3713,7 +3729,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416b1fe4d9105c741a2d6cd45aa8e6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 1674048857}
   target: {fileID: 139845002}
+  _minDistance: 1
+  _maxDistance: 10
+  _zoomSpeed: 0.01
 --- !u!114 &1674048861
 MonoBehaviour:
   m_ObjectHideFlags: 0

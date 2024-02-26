@@ -1,13 +1,32 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CameraBehavior : MonoBehaviour
 {
+    [SerializeField] Camera _camera;
     [SerializeField] GameObject target;
     bool isDragging;
     Vector2 startingMousePosition;
 
+    [SerializeField] private float _minDistance = 1f;
+    [SerializeField] private float _maxDistance = 10f;
+    [SerializeField] private float _zoomSpeed = 0.01f;
+    private Vector3 _originalCameraPosition;
+
+    private void Start()
+    {
+        _originalCameraPosition = _camera.transform.localPosition;
+    }
+
+    void FixedUpdate()
+    {
+        if (isDragging)
+        {
+            RotateObject();
+        }
+    }
     public void OnDrag(InputAction.CallbackContext action)
     {
         if (action.performed || action.started)
@@ -20,15 +39,15 @@ public class CameraBehavior : MonoBehaviour
             isDragging = false;
         }
     }
-
-    void FixedUpdate()
+    public void OnScroll(InputAction.CallbackContext action)
     {
-        if (isDragging)
-        {
-            RotateObject();
-        }
-    }
+        float scrollDelta = action.ReadValue<Vector2>().y;
+        float zoomAmount = scrollDelta * _zoomSpeed;
 
+        float newDistance = Mathf.Clamp(_camera.transform.localPosition.z + zoomAmount, -_maxDistance, -_minDistance);
+
+        _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, _camera.transform.localPosition.y, newDistance);
+    }
     void RotateObject()
     {
         Vector2 currentMousePosition = Mouse.current.position.ReadValue();
