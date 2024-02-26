@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMovementVerifier
 {
-    public void VerifyMovement(CubeBehavior cube, Vector3Int movementVector);
+    public void VerifyMovement(CubeBehaviour cube, Vector3Int movementVector);
 }
