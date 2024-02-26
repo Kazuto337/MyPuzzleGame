@@ -44,6 +44,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomCamena"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0d38dd5f-1c99-4ffe-aacd-ce596f42fc14"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""ClickButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""892c4485-8ea3-4ad8-ac55-fca6528d13ae"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomCamena"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_DragCamera = m_Gameplay.FindAction("DragCamera", throwIfNotFound: true);
         m_Gameplay_ClickButton = m_Gameplay.FindAction("ClickButton", throwIfNotFound: true);
+        m_Gameplay_ZoomCamena = m_Gameplay.FindAction("ZoomCamena", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_DragCamera;
     private readonly InputAction m_Gameplay_ClickButton;
+    private readonly InputAction m_Gameplay_ZoomCamena;
     public struct GameplayActions
     {
         private @ActionMap m_Wrapper;
         public GameplayActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @DragCamera => m_Wrapper.m_Gameplay_DragCamera;
         public InputAction @ClickButton => m_Wrapper.m_Gameplay_ClickButton;
+        public InputAction @ZoomCamena => m_Wrapper.m_Gameplay_ZoomCamena;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @ClickButton.started += instance.OnClickButton;
             @ClickButton.performed += instance.OnClickButton;
             @ClickButton.canceled += instance.OnClickButton;
+            @ZoomCamena.started += instance.OnZoomCamena;
+            @ZoomCamena.performed += instance.OnZoomCamena;
+            @ZoomCamena.canceled += instance.OnZoomCamena;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -172,6 +198,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @ClickButton.started -= instance.OnClickButton;
             @ClickButton.performed -= instance.OnClickButton;
             @ClickButton.canceled -= instance.OnClickButton;
+            @ZoomCamena.started -= instance.OnZoomCamena;
+            @ZoomCamena.performed -= instance.OnZoomCamena;
+            @ZoomCamena.canceled -= instance.OnZoomCamena;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -193,5 +222,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     {
         void OnDragCamera(InputAction.CallbackContext context);
         void OnClickButton(InputAction.CallbackContext context);
+        void OnZoomCamena(InputAction.CallbackContext context);
     }
 }

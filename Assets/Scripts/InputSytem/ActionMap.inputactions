@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ZoomCamena",
+                    "type": "PassThrough",
+                    "id": "0d38dd5f-1c99-4ffe-aacd-ce596f42fc14",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -44,6 +53,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ClickButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "892c4485-8ea3-4ad8-ac55-fca6528d13ae",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ZoomCamena",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

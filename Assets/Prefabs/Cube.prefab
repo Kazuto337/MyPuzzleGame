@@ -647,8 +647,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2493227830578626753}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -810,8 +810,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6055119677867541713}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1378,8 +1378,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6759100880699972216}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1811,8 +1811,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2670902035901537242}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2649,8 +2649,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3549364199677578134}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2947,8 +2947,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8354033294792264800}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3245,8 +3245,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5035968710768812497}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3543,8 +3543,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4940168581540164522}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3976,8 +3976,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7826676772566694671}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4179,8 +4179,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4188745294745805857}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3630507491983822220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470f5a6610325e946a9320674fe0ed2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f4aa00888e0e654e8a080c3e0fcc59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 9178310194652568506}
@@ -4336,6 +4336,12 @@ MonoBehaviour:
   - {fileID: 112266660042609615}
   - {fileID: 8150530071009002730}
   - {fileID: 5901868042481748666}
+  - {fileID: 4198428767537966552}
+  - {fileID: 7862524896982412020}
+  - {fileID: 8212006300693197554}
+  - {fileID: 770256425104657482}
+  - {fileID: 5658411725728100572}
+  - {fileID: 129367675307009043}
   coordBoxes:
   - {fileID: 1016431355519359527}
   - {fileID: 2346790524124289020}
@@ -4343,7 +4349,6 @@ MonoBehaviour:
   - {fileID: 4613702765628664015}
   - {fileID: 4925701352892246273}
   - {fileID: 8366665399658644368}
-  material: {fileID: 2100000, guid: b0a74a9c4a4361943b281c9d6c39a14e, type: 2}
 --- !u!1 &3711723108101830315
 GameObject:
   m_ObjectHideFlags: 0
@@ -4469,8 +4474,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1855853884801113463}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4767,8 +4772,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3824978613228958585}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5065,8 +5070,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2115494780931243305}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5228,8 +5233,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2132581867102012630}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5391,8 +5396,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4987422746544903819}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5824,8 +5829,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2650882445734468465}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5987,8 +5992,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 352527438911649768}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6555,8 +6560,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7368345768161307563}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6766,8 +6771,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1402313393147979284}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7199,8 +7204,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2578870951263764683}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7497,8 +7502,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3775633162371532618}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7795,8 +7800,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8415334676613937078}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9276,8 +9281,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8975399179351291907}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9574,8 +9579,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3921656651957646240}
-        m_TargetAssemblyTypeName: ArrowBehavior, Assembly-CSharp
-        m_MethodName: MoveCubve
+        m_TargetAssemblyTypeName: ArrowBehaviour, Assembly-CSharp
+        m_MethodName: OnArrowPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

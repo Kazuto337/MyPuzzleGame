@@ -2,7 +2,7 @@ using DependencyInjection;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleEngine : MonoBehaviour, IMovementVerifier, IDependencyProvider
+public class PuzzleEngine : MonoBehaviour, IDependencyProvider
 {
     Slot[,,] puzzleMatrix;
     [SerializeField] GameObject matrixOrigin;
